@@ -5,7 +5,8 @@ from datetime import datetime, date, time, timezone, timedelta
 
 # Import library python-telegram-bot
 # Pastikan Anda sudah menginstalnya: pip install python-telegram-bot
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ParseMode
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.constants import ParseMode  # <-- INI PERBAIKANNYA
 from telegram.ext import (
     Application,
     CommandHandler,
@@ -58,7 +59,7 @@ def calculate_days_remaining(deadline_str):
     """Menghitung sisa hari berdasarkan string deadline 'YYYY-MM-DD'."""
     today = date.today()
     try:
-        deadline_date = datetime.strptime(deadline_str, "%Y-%m-%d").date()
+        deadline_date = datetime.strptime(deadline_str, "%Y-MM-d").date()
         days_remaining = (deadline_date - today).days
         return days_remaining
     except ValueError:
@@ -362,3 +363,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
